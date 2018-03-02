@@ -47,9 +47,14 @@
             return;
         }
 
-        // Do nothing when active confirm modal.
-        if ($('.confirmation-modal').length > 0)
+        if ($('.confirmation-modal').length > 0) {
+            $('.confirmation-modal').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    $.confirm(options, e)
+                })
+            })
             return;
+        }
 
         // Parse options defined with "data-" attributes
         var dataOptions = {};
